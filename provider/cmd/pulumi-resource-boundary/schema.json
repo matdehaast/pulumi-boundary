@@ -1,0 +1,2021 @@
+{
+    "name": "boundary",
+    "description": "A Pulumi package for creating and managing boundary cloud resources.",
+    "keywords": [
+        "pulumi",
+        "boundary",
+        "category/cloud"
+    ],
+    "homepage": "https://www.pulumi.com",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`boundary` Terraform Provider](https://github.com/terraform-providers/terraform-provider-boundary).",
+    "repository": "https://github.com/matdehaast/pulumi-boundary",
+    "publisher": "Pulumi",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "config": {
+        "variables": {
+            "addr": {
+                "type": "string",
+                "description": "The base url of the Boundary API, e.g. \"http://127.0.0.1:9200\". If not set, it will be read from the \"BOUNDARY_ADDR\" env\nvar.\n"
+            },
+            "authMethodId": {
+                "type": "string",
+                "description": "The auth method ID e.g. ampw_1234567890\n"
+            },
+            "passwordAuthMethodLoginName": {
+                "type": "string",
+                "description": "The auth method login name for password-style auth methods\n"
+            },
+            "passwordAuthMethodPassword": {
+                "type": "string",
+                "description": "The auth method password for password-style auth methods\n"
+            },
+            "recoveryKmsHcl": {
+                "type": "string",
+                "description": "Can be a heredoc string or a path on disk. If set, the string/file will be parsed as HCL and used with the recovery KMS\nmechanism. While this is set, it will override any other authentication information; the KMS mechanism will always be\nused. See Boundary's KMS docs for examples: https://boundaryproject.io/docs/configuration/kms\n"
+            },
+            "tlsInsecure": {
+                "type": "boolean",
+                "description": "When set to true, does not validate the Boundary API endpoint certificate\n"
+            },
+            "token": {
+                "type": "string",
+                "description": "The Boundary token to use, as a string or path on disk containing just the string. If set, the token read here will be\nused in place of authenticating with the auth method specified in \"auth_method_id\", although the recovery KMS mechanism\nwill still override this. Can also be set with the BOUNDARY_TOKEN environment variable.\n"
+            }
+        },
+        "defaults": [
+            "addr"
+        ]
+    },
+    "provider": {
+        "description": "The provider type for the boundary package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "addr": {
+                "type": "string",
+                "description": "The base url of the Boundary API, e.g. \"http://127.0.0.1:9200\". If not set, it will be read from the \"BOUNDARY_ADDR\" env\nvar.\n"
+            },
+            "authMethodId": {
+                "type": "string",
+                "description": "The auth method ID e.g. ampw_1234567890\n"
+            },
+            "passwordAuthMethodLoginName": {
+                "type": "string",
+                "description": "The auth method login name for password-style auth methods\n"
+            },
+            "passwordAuthMethodPassword": {
+                "type": "string",
+                "description": "The auth method password for password-style auth methods\n"
+            },
+            "recoveryKmsHcl": {
+                "type": "string",
+                "description": "Can be a heredoc string or a path on disk. If set, the string/file will be parsed as HCL and used with the recovery KMS\nmechanism. While this is set, it will override any other authentication information; the KMS mechanism will always be\nused. See Boundary's KMS docs for examples: https://boundaryproject.io/docs/configuration/kms\n"
+            },
+            "tlsInsecure": {
+                "type": "boolean",
+                "description": "When set to true, does not validate the Boundary API endpoint certificate\n"
+            },
+            "token": {
+                "type": "string",
+                "description": "The Boundary token to use, as a string or path on disk containing just the string. If set, the token read here will be\nused in place of authenticating with the auth method specified in \"auth_method_id\", although the recovery KMS mechanism\nwill still override this. Can also be set with the BOUNDARY_TOKEN environment variable.\n"
+            }
+        },
+        "required": [
+            "addr"
+        ],
+        "inputProperties": {
+            "addr": {
+                "type": "string",
+                "description": "The base url of the Boundary API, e.g. \"http://127.0.0.1:9200\". If not set, it will be read from the \"BOUNDARY_ADDR\" env\nvar.\n"
+            },
+            "authMethodId": {
+                "type": "string",
+                "description": "The auth method ID e.g. ampw_1234567890\n"
+            },
+            "passwordAuthMethodLoginName": {
+                "type": "string",
+                "description": "The auth method login name for password-style auth methods\n"
+            },
+            "passwordAuthMethodPassword": {
+                "type": "string",
+                "description": "The auth method password for password-style auth methods\n"
+            },
+            "recoveryKmsHcl": {
+                "type": "string",
+                "description": "Can be a heredoc string or a path on disk. If set, the string/file will be parsed as HCL and used with the recovery KMS\nmechanism. While this is set, it will override any other authentication information; the KMS mechanism will always be\nused. See Boundary's KMS docs for examples: https://boundaryproject.io/docs/configuration/kms\n"
+            },
+            "tlsInsecure": {
+                "type": "boolean",
+                "description": "When set to true, does not validate the Boundary API endpoint certificate\n"
+            },
+            "token": {
+                "type": "string",
+                "description": "The Boundary token to use, as a string or path on disk containing just the string. If set, the token read here will be\nused in place of authenticating with the auth method specified in \"auth_method_id\", although the recovery KMS mechanism\nwill still override this. Can also be set with the BOUNDARY_TOKEN environment variable.\n"
+            }
+        },
+        "requiredInputs": [
+            "addr"
+        ]
+    },
+    "resources": {
+        "boundary:index/accountOidc:AccountOidc": {
+            "properties": {
+                "authMethodId": {
+                    "type": "string",
+                    "description": "The resource ID for the auth method.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The account description.\n"
+                },
+                "issuer": {
+                    "type": "string",
+                    "description": "The OIDC issuer.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The account name. Defaults to the resource name.\n"
+                },
+                "subject": {
+                    "type": "string",
+                    "description": "The OIDC subject.\n"
+                }
+            },
+            "required": [
+                "authMethodId",
+                "name"
+            ],
+            "inputProperties": {
+                "authMethodId": {
+                    "type": "string",
+                    "description": "The resource ID for the auth method.\n",
+                    "willReplaceOnChanges": true
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The account description.\n"
+                },
+                "issuer": {
+                    "type": "string",
+                    "description": "The OIDC issuer.\n",
+                    "willReplaceOnChanges": true
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The account name. Defaults to the resource name.\n"
+                },
+                "subject": {
+                    "type": "string",
+                    "description": "The OIDC subject.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "authMethodId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AccountOidc resources.\n",
+                "properties": {
+                    "authMethodId": {
+                        "type": "string",
+                        "description": "The resource ID for the auth method.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The account description.\n"
+                    },
+                    "issuer": {
+                        "type": "string",
+                        "description": "The OIDC issuer.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The account name. Defaults to the resource name.\n"
+                    },
+                    "subject": {
+                        "type": "string",
+                        "description": "The OIDC subject.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "boundary:index/accountPassword:AccountPassword": {
+            "properties": {
+                "authMethodId": {
+                    "type": "string",
+                    "description": "The resource ID for the auth method.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The account description.\n"
+                },
+                "loginName": {
+                    "type": "string",
+                    "description": "The login name for this account.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The account name. Defaults to the resource name.\n"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "The account password. Only set on create, changes will not be reflected when updating account.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The resource type.\n"
+                }
+            },
+            "required": [
+                "authMethodId",
+                "name",
+                "type"
+            ],
+            "inputProperties": {
+                "authMethodId": {
+                    "type": "string",
+                    "description": "The resource ID for the auth method.\n",
+                    "willReplaceOnChanges": true
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The account description.\n"
+                },
+                "loginName": {
+                    "type": "string",
+                    "description": "The login name for this account.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The account name. Defaults to the resource name.\n"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "The account password. Only set on create, changes will not be reflected when updating account.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The resource type.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "authMethodId",
+                "type"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AccountPassword resources.\n",
+                "properties": {
+                    "authMethodId": {
+                        "type": "string",
+                        "description": "The resource ID for the auth method.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The account description.\n"
+                    },
+                    "loginName": {
+                        "type": "string",
+                        "description": "The login name for this account.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The account name. Defaults to the resource name.\n"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "The account password. Only set on create, changes will not be reflected when updating account.\n"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "The resource type.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "boundary:index/authMethod:AuthMethod": {
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "The auth method description.\n"
+                },
+                "minLoginNameLength": {
+                    "type": "integer",
+                    "description": "The minimum login name length.\n",
+                    "deprecationMessage": "Will be removed in favor of using attributes parameter"
+                },
+                "minPasswordLength": {
+                    "type": "integer",
+                    "description": "The minimum password length.\n",
+                    "deprecationMessage": "Will be removed in favor of using attributes parameter"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The auth method name. Defaults to the resource name.\n"
+                },
+                "scopeId": {
+                    "type": "string",
+                    "description": "The scope ID.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The resource type.\n"
+                }
+            },
+            "required": [
+                "minLoginNameLength",
+                "minPasswordLength",
+                "name",
+                "scopeId",
+                "type"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "The auth method description.\n"
+                },
+                "minLoginNameLength": {
+                    "type": "integer",
+                    "description": "The minimum login name length.\n",
+                    "deprecationMessage": "Will be removed in favor of using attributes parameter"
+                },
+                "minPasswordLength": {
+                    "type": "integer",
+                    "description": "The minimum password length.\n",
+                    "deprecationMessage": "Will be removed in favor of using attributes parameter"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The auth method name. Defaults to the resource name.\n"
+                },
+                "scopeId": {
+                    "type": "string",
+                    "description": "The scope ID.\n",
+                    "willReplaceOnChanges": true
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The resource type.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "scopeId",
+                "type"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AuthMethod resources.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "The auth method description.\n"
+                    },
+                    "minLoginNameLength": {
+                        "type": "integer",
+                        "description": "The minimum login name length.\n",
+                        "deprecationMessage": "Will be removed in favor of using attributes parameter"
+                    },
+                    "minPasswordLength": {
+                        "type": "integer",
+                        "description": "The minimum password length.\n",
+                        "deprecationMessage": "Will be removed in favor of using attributes parameter"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The auth method name. Defaults to the resource name.\n"
+                    },
+                    "scopeId": {
+                        "type": "string",
+                        "description": "The scope ID.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "The resource type.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "boundary:index/authMethodOidc:AuthMethodOidc": {
+            "properties": {
+                "accountClaimMaps": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Account claim maps for the to_claim of sub.\n"
+                },
+                "allowedAudiences": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Audiences for which the provider responses will be allowed\n"
+                },
+                "apiUrlPrefix": {
+                    "type": "string",
+                    "description": "The API prefix to use when generating callback URLs for the provider. Should be set to an address at which the provider\ncan reach back to the controller.\n"
+                },
+                "callbackUrl": {
+                    "type": "string",
+                    "description": "The URL that should be provided to the IdP for callbacks.\n"
+                },
+                "claimsScopes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Claims scopes.\n"
+                },
+                "clientId": {
+                    "type": "string",
+                    "description": "The client ID assigned to this auth method from the provider.\n"
+                },
+                "clientSecret": {
+                    "type": "string",
+                    "description": "The secret key assigned to this auth method from the provider. Once set, only the hash will be kept and the original\nvalue can be removed from configuration.\n"
+                },
+                "clientSecretHmac": {
+                    "type": "string",
+                    "description": "The HMAC of the client secret returned by the Boundary controller, which is used for comparison after initial setting of\nthe value.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The auth method description.\n"
+                },
+                "disableDiscoveredConfigValidation": {
+                    "type": "boolean",
+                    "description": "Disables validation logic ensuring that the OIDC provider's information from its discovery endpoint matches the\ninformation here. The validation is only performed at create or update time.\n"
+                },
+                "idpCaCerts": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of CA certificates to trust when validating the IdP's token signatures.\n"
+                },
+                "isPrimaryForScope": {
+                    "type": "boolean",
+                    "description": "When true, makes this auth method the primary auth method for the scope in which it resides. The primary auth method for\na scope means the the user will be automatically created when they login using an OIDC account.\n"
+                },
+                "issuer": {
+                    "type": "string",
+                    "description": "The issuer corresponding to the provider, which must match the issuer field in generated tokens.\n"
+                },
+                "maxAge": {
+                    "type": "integer",
+                    "description": "The max age to provide to the provider, indicating how much time is allowed to have passed since the last authentication\nbefore the user is challenged again.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The auth method name. Defaults to the resource name.\n"
+                },
+                "scopeId": {
+                    "type": "string",
+                    "description": "The scope ID.\n"
+                },
+                "signingAlgorithms": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Allowed signing algorithms for the provider's issued tokens.\n"
+                },
+                "state": {
+                    "type": "string",
+                    "description": "Can be one of 'inactive', 'active-private', or 'active-public'. Currently automatically set to active-public.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of auth method; hardcoded.\n"
+                }
+            },
+            "required": [
+                "callbackUrl",
+                "clientSecretHmac",
+                "name",
+                "scopeId",
+                "state"
+            ],
+            "inputProperties": {
+                "accountClaimMaps": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Account claim maps for the to_claim of sub.\n",
+                    "willReplaceOnChanges": true
+                },
+                "allowedAudiences": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Audiences for which the provider responses will be allowed\n"
+                },
+                "apiUrlPrefix": {
+                    "type": "string",
+                    "description": "The API prefix to use when generating callback URLs for the provider. Should be set to an address at which the provider\ncan reach back to the controller.\n"
+                },
+                "callbackUrl": {
+                    "type": "string",
+                    "description": "The URL that should be provided to the IdP for callbacks.\n"
+                },
+                "claimsScopes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Claims scopes.\n"
+                },
+                "clientId": {
+                    "type": "string",
+                    "description": "The client ID assigned to this auth method from the provider.\n"
+                },
+                "clientSecret": {
+                    "type": "string",
+                    "description": "The secret key assigned to this auth method from the provider. Once set, only the hash will be kept and the original\nvalue can be removed from configuration.\n"
+                },
+                "clientSecretHmac": {
+                    "type": "string",
+                    "description": "The HMAC of the client secret returned by the Boundary controller, which is used for comparison after initial setting of\nthe value.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The auth method description.\n"
+                },
+                "disableDiscoveredConfigValidation": {
+                    "type": "boolean",
+                    "description": "Disables validation logic ensuring that the OIDC provider's information from its discovery endpoint matches the\ninformation here. The validation is only performed at create or update time.\n"
+                },
+                "idpCaCerts": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of CA certificates to trust when validating the IdP's token signatures.\n"
+                },
+                "isPrimaryForScope": {
+                    "type": "boolean",
+                    "description": "When true, makes this auth method the primary auth method for the scope in which it resides. The primary auth method for\na scope means the the user will be automatically created when they login using an OIDC account.\n"
+                },
+                "issuer": {
+                    "type": "string",
+                    "description": "The issuer corresponding to the provider, which must match the issuer field in generated tokens.\n"
+                },
+                "maxAge": {
+                    "type": "integer",
+                    "description": "The max age to provide to the provider, indicating how much time is allowed to have passed since the last authentication\nbefore the user is challenged again.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The auth method name. Defaults to the resource name.\n"
+                },
+                "scopeId": {
+                    "type": "string",
+                    "description": "The scope ID.\n",
+                    "willReplaceOnChanges": true
+                },
+                "signingAlgorithms": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Allowed signing algorithms for the provider's issued tokens.\n"
+                },
+                "state": {
+                    "type": "string",
+                    "description": "Can be one of 'inactive', 'active-private', or 'active-public'. Currently automatically set to active-public.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of auth method; hardcoded.\n"
+                }
+            },
+            "requiredInputs": [
+                "scopeId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AuthMethodOidc resources.\n",
+                "properties": {
+                    "accountClaimMaps": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Account claim maps for the to_claim of sub.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "allowedAudiences": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Audiences for which the provider responses will be allowed\n"
+                    },
+                    "apiUrlPrefix": {
+                        "type": "string",
+                        "description": "The API prefix to use when generating callback URLs for the provider. Should be set to an address at which the provider\ncan reach back to the controller.\n"
+                    },
+                    "callbackUrl": {
+                        "type": "string",
+                        "description": "The URL that should be provided to the IdP for callbacks.\n"
+                    },
+                    "claimsScopes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Claims scopes.\n"
+                    },
+                    "clientId": {
+                        "type": "string",
+                        "description": "The client ID assigned to this auth method from the provider.\n"
+                    },
+                    "clientSecret": {
+                        "type": "string",
+                        "description": "The secret key assigned to this auth method from the provider. Once set, only the hash will be kept and the original\nvalue can be removed from configuration.\n"
+                    },
+                    "clientSecretHmac": {
+                        "type": "string",
+                        "description": "The HMAC of the client secret returned by the Boundary controller, which is used for comparison after initial setting of\nthe value.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The auth method description.\n"
+                    },
+                    "disableDiscoveredConfigValidation": {
+                        "type": "boolean",
+                        "description": "Disables validation logic ensuring that the OIDC provider's information from its discovery endpoint matches the\ninformation here. The validation is only performed at create or update time.\n"
+                    },
+                    "idpCaCerts": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of CA certificates to trust when validating the IdP's token signatures.\n"
+                    },
+                    "isPrimaryForScope": {
+                        "type": "boolean",
+                        "description": "When true, makes this auth method the primary auth method for the scope in which it resides. The primary auth method for\na scope means the the user will be automatically created when they login using an OIDC account.\n"
+                    },
+                    "issuer": {
+                        "type": "string",
+                        "description": "The issuer corresponding to the provider, which must match the issuer field in generated tokens.\n"
+                    },
+                    "maxAge": {
+                        "type": "integer",
+                        "description": "The max age to provide to the provider, indicating how much time is allowed to have passed since the last authentication\nbefore the user is challenged again.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The auth method name. Defaults to the resource name.\n"
+                    },
+                    "scopeId": {
+                        "type": "string",
+                        "description": "The scope ID.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "signingAlgorithms": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Allowed signing algorithms for the provider's issued tokens.\n"
+                    },
+                    "state": {
+                        "type": "string",
+                        "description": "Can be one of 'inactive', 'active-private', or 'active-public'. Currently automatically set to active-public.\n"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "The type of auth method; hardcoded.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "boundary:index/authMethodPassword:AuthMethodPassword": {
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "The auth method description.\n"
+                },
+                "minLoginNameLength": {
+                    "type": "integer",
+                    "description": "The minimum login name length.\n"
+                },
+                "minPasswordLength": {
+                    "type": "integer",
+                    "description": "The minimum password length.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The auth method name. Defaults to the resource name.\n"
+                },
+                "scopeId": {
+                    "type": "string",
+                    "description": "The scope ID.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The resource type, hardcoded per resource\n"
+                }
+            },
+            "required": [
+                "minLoginNameLength",
+                "minPasswordLength",
+                "name",
+                "scopeId"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "The auth method description.\n"
+                },
+                "minLoginNameLength": {
+                    "type": "integer",
+                    "description": "The minimum login name length.\n"
+                },
+                "minPasswordLength": {
+                    "type": "integer",
+                    "description": "The minimum password length.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The auth method name. Defaults to the resource name.\n"
+                },
+                "scopeId": {
+                    "type": "string",
+                    "description": "The scope ID.\n",
+                    "willReplaceOnChanges": true
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The resource type, hardcoded per resource\n"
+                }
+            },
+            "requiredInputs": [
+                "scopeId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering AuthMethodPassword resources.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "The auth method description.\n"
+                    },
+                    "minLoginNameLength": {
+                        "type": "integer",
+                        "description": "The minimum login name length.\n"
+                    },
+                    "minPasswordLength": {
+                        "type": "integer",
+                        "description": "The minimum password length.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The auth method name. Defaults to the resource name.\n"
+                    },
+                    "scopeId": {
+                        "type": "string",
+                        "description": "The scope ID.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "The resource type, hardcoded per resource\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "boundary:index/credentialLibraryVault:CredentialLibraryVault": {
+            "properties": {
+                "credentialStoreId": {
+                    "type": "string",
+                    "description": "The ID of the credential store that this library belongs to.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The Vault credential library description.\n"
+                },
+                "httpMethod": {
+                    "type": "string",
+                    "description": "The HTTP method the library uses when requesting credentials from Vault. Defaults to 'GET'\n"
+                },
+                "httpRequestBody": {
+                    "type": "string",
+                    "description": "The body of the HTTP request the library sends to Vault when requesting credentials. Only valid if `http_method` is set\nto `POST`.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The Vault credential library name. Defaults to the resource name.\n"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "The path in Vault to request credentials from.\n"
+                }
+            },
+            "required": [
+                "credentialStoreId",
+                "name",
+                "path"
+            ],
+            "inputProperties": {
+                "credentialStoreId": {
+                    "type": "string",
+                    "description": "The ID of the credential store that this library belongs to.\n",
+                    "willReplaceOnChanges": true
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The Vault credential library description.\n"
+                },
+                "httpMethod": {
+                    "type": "string",
+                    "description": "The HTTP method the library uses when requesting credentials from Vault. Defaults to 'GET'\n"
+                },
+                "httpRequestBody": {
+                    "type": "string",
+                    "description": "The body of the HTTP request the library sends to Vault when requesting credentials. Only valid if `http_method` is set\nto `POST`.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The Vault credential library name. Defaults to the resource name.\n"
+                },
+                "path": {
+                    "type": "string",
+                    "description": "The path in Vault to request credentials from.\n"
+                }
+            },
+            "requiredInputs": [
+                "credentialStoreId",
+                "path"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering CredentialLibraryVault resources.\n",
+                "properties": {
+                    "credentialStoreId": {
+                        "type": "string",
+                        "description": "The ID of the credential store that this library belongs to.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The Vault credential library description.\n"
+                    },
+                    "httpMethod": {
+                        "type": "string",
+                        "description": "The HTTP method the library uses when requesting credentials from Vault. Defaults to 'GET'\n"
+                    },
+                    "httpRequestBody": {
+                        "type": "string",
+                        "description": "The body of the HTTP request the library sends to Vault when requesting credentials. Only valid if `http_method` is set\nto `POST`.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The Vault credential library name. Defaults to the resource name.\n"
+                    },
+                    "path": {
+                        "type": "string",
+                        "description": "The path in Vault to request credentials from.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "boundary:index/group:Group": {
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "The group description.\n"
+                },
+                "memberIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Resource IDs for group members, these are most likely boundary users.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The group name. Defaults to the resource name.\n"
+                },
+                "scopeId": {
+                    "type": "string",
+                    "description": "The scope ID in which the resource is created. Defaults to the provider's `default_scope` if unset.\n"
+                }
+            },
+            "required": [
+                "name",
+                "scopeId"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "The group description.\n"
+                },
+                "memberIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Resource IDs for group members, these are most likely boundary users.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The group name. Defaults to the resource name.\n"
+                },
+                "scopeId": {
+                    "type": "string",
+                    "description": "The scope ID in which the resource is created. Defaults to the provider's `default_scope` if unset.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "scopeId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Group resources.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "The group description.\n"
+                    },
+                    "memberIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Resource IDs for group members, these are most likely boundary users.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The group name. Defaults to the resource name.\n"
+                    },
+                    "scopeId": {
+                        "type": "string",
+                        "description": "The scope ID in which the resource is created. Defaults to the provider's `default_scope` if unset.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "boundary:index/hostCatalogPlugin:HostCatalogPlugin": {
+            "properties": {
+                "attributesJson": {
+                    "type": "string",
+                    "description": "The attributes for the host catalog. Either values encoded with the \"jsonencode\" function, pre-escaped JSON string, or a\nfile:// or env:// path. Set to a string \"null\" or remove the block to clear all attributes in the host catalog.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The host catalog description.\n"
+                },
+                "internalForceUpdate": {
+                    "type": "string",
+                    "description": "Internal only. Used to force update so that we can always check the value of secrets.\n"
+                },
+                "internalHmacUsedForSecretsConfigHmac": {
+                    "type": "string",
+                    "description": "Internal only. The Boundary-provided HMAC used to calculate the current value of the HMAC'd config. Used for drift\ndetection.\n"
+                },
+                "internalSecretsConfigHmac": {
+                    "type": "string",
+                    "description": "Internal only. HMAC of (serverSecretsHmac + config secrets). Used for proper secrets handling.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The host catalog name. Defaults to the resource name.\n"
+                },
+                "pluginId": {
+                    "type": "string",
+                    "description": "The ID of the plugin that should back the resource. This or plugin_name must be defined.\n"
+                },
+                "pluginName": {
+                    "type": "string",
+                    "description": "The name of the plugin that should back the resource. This or plugin_id must be defined.\n"
+                },
+                "scopeId": {
+                    "type": "string",
+                    "description": "The scope ID in which the resource is created.\n"
+                },
+                "secretsHmac": {
+                    "type": "string",
+                    "description": "The HMAC'd secrets value returned from the server.\n"
+                },
+                "secretsJson": {
+                    "type": "string",
+                    "description": "The secrets for the host catalog. Either values encoded with the \"jsonencode\" function, pre-escaped JSON string, or a\nfile:// or env:// path. Set to a string \"null\" to clear any existing values. NOTE: Unlike \"attributes_json\", removing\nthis block will NOT clear secrets from the host catalog; this allows injecting secrets for one call, then removing them\nfor storage.\n"
+                }
+            },
+            "required": [
+                "internalForceUpdate",
+                "internalHmacUsedForSecretsConfigHmac",
+                "internalSecretsConfigHmac",
+                "name",
+                "pluginId",
+                "pluginName",
+                "scopeId",
+                "secretsHmac"
+            ],
+            "inputProperties": {
+                "attributesJson": {
+                    "type": "string",
+                    "description": "The attributes for the host catalog. Either values encoded with the \"jsonencode\" function, pre-escaped JSON string, or a\nfile:// or env:// path. Set to a string \"null\" or remove the block to clear all attributes in the host catalog.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The host catalog description.\n"
+                },
+                "internalForceUpdate": {
+                    "type": "string",
+                    "description": "Internal only. Used to force update so that we can always check the value of secrets.\n"
+                },
+                "internalHmacUsedForSecretsConfigHmac": {
+                    "type": "string",
+                    "description": "Internal only. The Boundary-provided HMAC used to calculate the current value of the HMAC'd config. Used for drift\ndetection.\n"
+                },
+                "internalSecretsConfigHmac": {
+                    "type": "string",
+                    "description": "Internal only. HMAC of (serverSecretsHmac + config secrets). Used for proper secrets handling.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The host catalog name. Defaults to the resource name.\n"
+                },
+                "pluginId": {
+                    "type": "string",
+                    "description": "The ID of the plugin that should back the resource. This or plugin_name must be defined.\n",
+                    "willReplaceOnChanges": true
+                },
+                "pluginName": {
+                    "type": "string",
+                    "description": "The name of the plugin that should back the resource. This or plugin_id must be defined.\n",
+                    "willReplaceOnChanges": true
+                },
+                "scopeId": {
+                    "type": "string",
+                    "description": "The scope ID in which the resource is created.\n",
+                    "willReplaceOnChanges": true
+                },
+                "secretsHmac": {
+                    "type": "string",
+                    "description": "The HMAC'd secrets value returned from the server.\n"
+                },
+                "secretsJson": {
+                    "type": "string",
+                    "description": "The secrets for the host catalog. Either values encoded with the \"jsonencode\" function, pre-escaped JSON string, or a\nfile:// or env:// path. Set to a string \"null\" to clear any existing values. NOTE: Unlike \"attributes_json\", removing\nthis block will NOT clear secrets from the host catalog; this allows injecting secrets for one call, then removing them\nfor storage.\n"
+                }
+            },
+            "requiredInputs": [
+                "scopeId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering HostCatalogPlugin resources.\n",
+                "properties": {
+                    "attributesJson": {
+                        "type": "string",
+                        "description": "The attributes for the host catalog. Either values encoded with the \"jsonencode\" function, pre-escaped JSON string, or a\nfile:// or env:// path. Set to a string \"null\" or remove the block to clear all attributes in the host catalog.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The host catalog description.\n"
+                    },
+                    "internalForceUpdate": {
+                        "type": "string",
+                        "description": "Internal only. Used to force update so that we can always check the value of secrets.\n"
+                    },
+                    "internalHmacUsedForSecretsConfigHmac": {
+                        "type": "string",
+                        "description": "Internal only. The Boundary-provided HMAC used to calculate the current value of the HMAC'd config. Used for drift\ndetection.\n"
+                    },
+                    "internalSecretsConfigHmac": {
+                        "type": "string",
+                        "description": "Internal only. HMAC of (serverSecretsHmac + config secrets). Used for proper secrets handling.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The host catalog name. Defaults to the resource name.\n"
+                    },
+                    "pluginId": {
+                        "type": "string",
+                        "description": "The ID of the plugin that should back the resource. This or plugin_name must be defined.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "pluginName": {
+                        "type": "string",
+                        "description": "The name of the plugin that should back the resource. This or plugin_id must be defined.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "scopeId": {
+                        "type": "string",
+                        "description": "The scope ID in which the resource is created.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "secretsHmac": {
+                        "type": "string",
+                        "description": "The HMAC'd secrets value returned from the server.\n"
+                    },
+                    "secretsJson": {
+                        "type": "string",
+                        "description": "The secrets for the host catalog. Either values encoded with the \"jsonencode\" function, pre-escaped JSON string, or a\nfile:// or env:// path. Set to a string \"null\" to clear any existing values. NOTE: Unlike \"attributes_json\", removing\nthis block will NOT clear secrets from the host catalog; this allows injecting secrets for one call, then removing them\nfor storage.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "boundary:index/hostCatalogStatic:HostCatalogStatic": {
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "The host catalog description.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The host catalog name. Defaults to the resource name.\n"
+                },
+                "scopeId": {
+                    "type": "string",
+                    "description": "The scope ID in which the resource is created.\n"
+                }
+            },
+            "required": [
+                "name",
+                "scopeId"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "The host catalog description.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The host catalog name. Defaults to the resource name.\n"
+                },
+                "scopeId": {
+                    "type": "string",
+                    "description": "The scope ID in which the resource is created.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "scopeId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering HostCatalogStatic resources.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "The host catalog description.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The host catalog name. Defaults to the resource name.\n"
+                    },
+                    "scopeId": {
+                        "type": "string",
+                        "description": "The scope ID in which the resource is created.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "boundary:index/hostSetPlugin:HostSetPlugin": {
+            "properties": {
+                "attributesJson": {
+                    "type": "string",
+                    "description": "The attributes for the host set. Either values encoded with the \"jsonencode\" function, pre-escaped JSON string, or a\nfile:// or env:// path. Set to a string \"null\" or remove the block to clear all attributes in the host set.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The host set description.\n"
+                },
+                "hostCatalogId": {
+                    "type": "string",
+                    "description": "The catalog for the host set.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The host set name. Defaults to the resource name.\n"
+                },
+                "preferredEndpoints": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The ordered list of preferred endpoints.\n"
+                },
+                "syncIntervalSeconds": {
+                    "type": "integer",
+                    "description": "The value to set for the sync interval seconds.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of host set\n"
+                }
+            },
+            "required": [
+                "hostCatalogId",
+                "name"
+            ],
+            "inputProperties": {
+                "attributesJson": {
+                    "type": "string",
+                    "description": "The attributes for the host set. Either values encoded with the \"jsonencode\" function, pre-escaped JSON string, or a\nfile:// or env:// path. Set to a string \"null\" or remove the block to clear all attributes in the host set.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The host set description.\n"
+                },
+                "hostCatalogId": {
+                    "type": "string",
+                    "description": "The catalog for the host set.\n",
+                    "willReplaceOnChanges": true
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The host set name. Defaults to the resource name.\n"
+                },
+                "preferredEndpoints": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The ordered list of preferred endpoints.\n"
+                },
+                "syncIntervalSeconds": {
+                    "type": "integer",
+                    "description": "The value to set for the sync interval seconds.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of host set\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "hostCatalogId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering HostSetPlugin resources.\n",
+                "properties": {
+                    "attributesJson": {
+                        "type": "string",
+                        "description": "The attributes for the host set. Either values encoded with the \"jsonencode\" function, pre-escaped JSON string, or a\nfile:// or env:// path. Set to a string \"null\" or remove the block to clear all attributes in the host set.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The host set description.\n"
+                    },
+                    "hostCatalogId": {
+                        "type": "string",
+                        "description": "The catalog for the host set.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The host set name. Defaults to the resource name.\n"
+                    },
+                    "preferredEndpoints": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The ordered list of preferred endpoints.\n"
+                    },
+                    "syncIntervalSeconds": {
+                        "type": "integer",
+                        "description": "The value to set for the sync interval seconds.\n"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "The type of host set\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "boundary:index/hostSetStatic:HostSetStatic": {
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "The host set description.\n"
+                },
+                "hostCatalogId": {
+                    "type": "string",
+                    "description": "The catalog for the host set.\n"
+                },
+                "hostIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of host IDs contained in this set.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The host set name. Defaults to the resource name.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of host set\n"
+                }
+            },
+            "required": [
+                "hostCatalogId",
+                "name"
+            ],
+            "inputProperties": {
+                "description": {
+                    "type": "string",
+                    "description": "The host set description.\n"
+                },
+                "hostCatalogId": {
+                    "type": "string",
+                    "description": "The catalog for the host set.\n",
+                    "willReplaceOnChanges": true
+                },
+                "hostIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "The list of host IDs contained in this set.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The host set name. Defaults to the resource name.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of host set\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "hostCatalogId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering HostSetStatic resources.\n",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "The host set description.\n"
+                    },
+                    "hostCatalogId": {
+                        "type": "string",
+                        "description": "The catalog for the host set.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "hostIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "The list of host IDs contained in this set.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The host set name. Defaults to the resource name.\n"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "The type of host set\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "boundary:index/hostStatic:HostStatic": {
+            "properties": {
+                "address": {
+                    "type": "string",
+                    "description": "The static address of the host resource as `\u003cIP\u003e` (note: port assignment occurs in the target resource definition, do\nnot add :port here) or a domain name.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The host description.\n"
+                },
+                "hostCatalogId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The host name. Defaults to the resource name.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of host\n"
+                }
+            },
+            "required": [
+                "hostCatalogId",
+                "name"
+            ],
+            "inputProperties": {
+                "address": {
+                    "type": "string",
+                    "description": "The static address of the host resource as `\u003cIP\u003e` (note: port assignment occurs in the target resource definition, do\nnot add :port here) or a domain name.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The host description.\n"
+                },
+                "hostCatalogId": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The host name. Defaults to the resource name.\n"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The type of host\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "hostCatalogId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering HostStatic resources.\n",
+                "properties": {
+                    "address": {
+                        "type": "string",
+                        "description": "The static address of the host resource as `\u003cIP\u003e` (note: port assignment occurs in the target resource definition, do\nnot add :port here) or a domain name.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The host description.\n"
+                    },
+                    "hostCatalogId": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The host name. Defaults to the resource name.\n"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "The type of host\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "boundary:index/managedGroup:ManagedGroup": {
+            "properties": {
+                "authMethodId": {
+                    "type": "string",
+                    "description": "The resource ID for the auth method.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The managed group description.\n"
+                },
+                "filter": {
+                    "type": "string",
+                    "description": "Boolean expression to filter the workers for this managed group.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The managed group name. Defaults to the resource name.\n"
+                }
+            },
+            "required": [
+                "authMethodId",
+                "filter",
+                "name"
+            ],
+            "inputProperties": {
+                "authMethodId": {
+                    "type": "string",
+                    "description": "The resource ID for the auth method.\n",
+                    "willReplaceOnChanges": true
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The managed group description.\n"
+                },
+                "filter": {
+                    "type": "string",
+                    "description": "Boolean expression to filter the workers for this managed group.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The managed group name. Defaults to the resource name.\n"
+                }
+            },
+            "requiredInputs": [
+                "authMethodId",
+                "filter"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering ManagedGroup resources.\n",
+                "properties": {
+                    "authMethodId": {
+                        "type": "string",
+                        "description": "The resource ID for the auth method.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The managed group description.\n"
+                    },
+                    "filter": {
+                        "type": "string",
+                        "description": "Boolean expression to filter the workers for this managed group.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The managed group name. Defaults to the resource name.\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "boundary:index/role:Role": {
+            "properties": {
+                "defaultRole": {
+                    "type": "boolean",
+                    "description": "Indicates that the role containing this value is the default role (that is, has the id 'r_default'), which triggers some\nspecialized behavior to allow it to be imported and managed.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The role description.\n"
+                },
+                "grantScopeId": {
+                    "type": "string"
+                },
+                "grantStrings": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of stringified grants for the role.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The role name. Defaults to the resource name.\n"
+                },
+                "principalIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of principal (user or group) IDs to add as principals on the role.\n"
+                },
+                "scopeId": {
+                    "type": "string",
+                    "description": "The scope ID in which the resource is created. Defaults to the provider's `default_scope` if unset.\n"
+                }
+            },
+            "required": [
+                "grantScopeId",
+                "name",
+                "scopeId"
+            ],
+            "inputProperties": {
+                "defaultRole": {
+                    "type": "boolean",
+                    "description": "Indicates that the role containing this value is the default role (that is, has the id 'r_default'), which triggers some\nspecialized behavior to allow it to be imported and managed.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The role description.\n"
+                },
+                "grantScopeId": {
+                    "type": "string"
+                },
+                "grantStrings": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of stringified grants for the role.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The role name. Defaults to the resource name.\n"
+                },
+                "principalIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of principal (user or group) IDs to add as principals on the role.\n"
+                },
+                "scopeId": {
+                    "type": "string",
+                    "description": "The scope ID in which the resource is created. Defaults to the provider's `default_scope` if unset.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "scopeId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Role resources.\n",
+                "properties": {
+                    "defaultRole": {
+                        "type": "boolean",
+                        "description": "Indicates that the role containing this value is the default role (that is, has the id 'r_default'), which triggers some\nspecialized behavior to allow it to be imported and managed.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The role description.\n"
+                    },
+                    "grantScopeId": {
+                        "type": "string"
+                    },
+                    "grantStrings": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of stringified grants for the role.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The role name. Defaults to the resource name.\n"
+                    },
+                    "principalIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of principal (user or group) IDs to add as principals on the role.\n"
+                    },
+                    "scopeId": {
+                        "type": "string",
+                        "description": "The scope ID in which the resource is created. Defaults to the provider's `default_scope` if unset.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "boundary:index/scope:Scope": {
+            "properties": {
+                "autoCreateAdminRole": {
+                    "type": "boolean",
+                    "description": "If set, when a new scope is created, the provider will not disable the functionality that automatically creates a role\nin the new scope and gives permissions to manage the scope to the provider's user. Marking this true makes for simpler\nHCL but results in role resources that are unmanaged by Terraform.\n"
+                },
+                "autoCreateDefaultRole": {
+                    "type": "boolean",
+                    "description": "Only relevant when creating an org scope. If set, when a new scope is created, the provider will not disable the\nfunctionality that automatically creates a role in the new scope and gives listing of scopes and auth methods and the\nability to authenticate to the anonymous user. Marking this true makes for simpler HCL but results in role resources\nthat are unmanaged by Terraform.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The scope description.\n"
+                },
+                "globalScope": {
+                    "type": "boolean",
+                    "description": "Indicates that the scope containing this value is the global scope, which triggers some specialized behavior to allow it\nto be imported and managed.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The scope name. Defaults to the resource name.\n"
+                },
+                "scopeId": {
+                    "type": "string",
+                    "description": "The scope ID containing the sub scope resource.\n"
+                }
+            },
+            "required": [
+                "name",
+                "scopeId"
+            ],
+            "inputProperties": {
+                "autoCreateAdminRole": {
+                    "type": "boolean",
+                    "description": "If set, when a new scope is created, the provider will not disable the functionality that automatically creates a role\nin the new scope and gives permissions to manage the scope to the provider's user. Marking this true makes for simpler\nHCL but results in role resources that are unmanaged by Terraform.\n"
+                },
+                "autoCreateDefaultRole": {
+                    "type": "boolean",
+                    "description": "Only relevant when creating an org scope. If set, when a new scope is created, the provider will not disable the\nfunctionality that automatically creates a role in the new scope and gives listing of scopes and auth methods and the\nability to authenticate to the anonymous user. Marking this true makes for simpler HCL but results in role resources\nthat are unmanaged by Terraform.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The scope description.\n"
+                },
+                "globalScope": {
+                    "type": "boolean",
+                    "description": "Indicates that the scope containing this value is the global scope, which triggers some specialized behavior to allow it\nto be imported and managed.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The scope name. Defaults to the resource name.\n"
+                },
+                "scopeId": {
+                    "type": "string",
+                    "description": "The scope ID containing the sub scope resource.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "scopeId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Scope resources.\n",
+                "properties": {
+                    "autoCreateAdminRole": {
+                        "type": "boolean",
+                        "description": "If set, when a new scope is created, the provider will not disable the functionality that automatically creates a role\nin the new scope and gives permissions to manage the scope to the provider's user. Marking this true makes for simpler\nHCL but results in role resources that are unmanaged by Terraform.\n"
+                    },
+                    "autoCreateDefaultRole": {
+                        "type": "boolean",
+                        "description": "Only relevant when creating an org scope. If set, when a new scope is created, the provider will not disable the\nfunctionality that automatically creates a role in the new scope and gives listing of scopes and auth methods and the\nability to authenticate to the anonymous user. Marking this true makes for simpler HCL but results in role resources\nthat are unmanaged by Terraform.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The scope description.\n"
+                    },
+                    "globalScope": {
+                        "type": "boolean",
+                        "description": "Indicates that the scope containing this value is the global scope, which triggers some specialized behavior to allow it\nto be imported and managed.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The scope name. Defaults to the resource name.\n"
+                    },
+                    "scopeId": {
+                        "type": "string",
+                        "description": "The scope ID containing the sub scope resource.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "boundary:index/target:Target": {
+            "properties": {
+                "applicationCredentialSourceIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of application credential source ID's.\n"
+                },
+                "defaultPort": {
+                    "type": "integer",
+                    "description": "The default port for this target.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The target description.\n"
+                },
+                "hostSourceIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of host source ID's.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The target name. Defaults to the resource name.\n"
+                },
+                "scopeId": {
+                    "type": "string",
+                    "description": "The scope ID in which the resource is created. Defaults to the provider's `default_scope` if unset.\n"
+                },
+                "sessionConnectionLimit": {
+                    "type": "integer"
+                },
+                "sessionMaxSeconds": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The target resource type.\n"
+                },
+                "workerFilter": {
+                    "type": "string",
+                    "description": "Boolean expression to filter the workers for this target\n"
+                }
+            },
+            "required": [
+                "name",
+                "scopeId",
+                "sessionConnectionLimit",
+                "sessionMaxSeconds",
+                "type"
+            ],
+            "inputProperties": {
+                "applicationCredentialSourceIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of application credential source ID's.\n"
+                },
+                "defaultPort": {
+                    "type": "integer",
+                    "description": "The default port for this target.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The target description.\n"
+                },
+                "hostSourceIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "A list of host source ID's.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The target name. Defaults to the resource name.\n"
+                },
+                "scopeId": {
+                    "type": "string",
+                    "description": "The scope ID in which the resource is created. Defaults to the provider's `default_scope` if unset.\n",
+                    "willReplaceOnChanges": true
+                },
+                "sessionConnectionLimit": {
+                    "type": "integer"
+                },
+                "sessionMaxSeconds": {
+                    "type": "integer"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "The target resource type.\n",
+                    "willReplaceOnChanges": true
+                },
+                "workerFilter": {
+                    "type": "string",
+                    "description": "Boolean expression to filter the workers for this target\n"
+                }
+            },
+            "requiredInputs": [
+                "scopeId",
+                "type"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Target resources.\n",
+                "properties": {
+                    "applicationCredentialSourceIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of application credential source ID's.\n"
+                    },
+                    "defaultPort": {
+                        "type": "integer",
+                        "description": "The default port for this target.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The target description.\n"
+                    },
+                    "hostSourceIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "A list of host source ID's.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The target name. Defaults to the resource name.\n"
+                    },
+                    "scopeId": {
+                        "type": "string",
+                        "description": "The scope ID in which the resource is created. Defaults to the provider's `default_scope` if unset.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "sessionConnectionLimit": {
+                        "type": "integer"
+                    },
+                    "sessionMaxSeconds": {
+                        "type": "integer"
+                    },
+                    "type": {
+                        "type": "string",
+                        "description": "The target resource type.\n",
+                        "willReplaceOnChanges": true
+                    },
+                    "workerFilter": {
+                        "type": "string",
+                        "description": "Boolean expression to filter the workers for this target\n"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "boundary:index/user:User": {
+            "properties": {
+                "accountIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Account ID's to associate with this user resource.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The user description.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The username. Defaults to the resource name.\n"
+                },
+                "scopeId": {
+                    "type": "string",
+                    "description": "The scope ID in which the resource is created. Defaults to the provider's `default_scope` if unset.\n"
+                }
+            },
+            "required": [
+                "name",
+                "scopeId"
+            ],
+            "inputProperties": {
+                "accountIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Account ID's to associate with this user resource.\n"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "The user description.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The username. Defaults to the resource name.\n"
+                },
+                "scopeId": {
+                    "type": "string",
+                    "description": "The scope ID in which the resource is created. Defaults to the provider's `default_scope` if unset.\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "scopeId"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering User resources.\n",
+                "properties": {
+                    "accountIds": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Account ID's to associate with this user resource.\n"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The user description.\n"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The username. Defaults to the resource name.\n"
+                    },
+                    "scopeId": {
+                        "type": "string",
+                        "description": "The scope ID in which the resource is created. Defaults to the provider's `default_scope` if unset.\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "language": {
+        "go": {
+            "generateExtraInputTypes": true,
+            "generateResourceContainerTypes": true,
+            "importBasePath": "github.com/matdehaast/pulumi-boundary/sdk/go/boundary"
+        },
+        "nodejs": {
+            "compatibility": "tfbridge20",
+            "disableUnionOutputTypes": true,
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/terraform-providers/terraform-provider-boundary)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi/pulumi-boundary` repo](https://github.com/pulumi/pulumi-boundary/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-providers/terraform-provider-boundary` repo](https://github.com/terraform-providers/terraform-provider-boundary/issues)."
+        },
+        "python": {
+            "compatibility": "tfbridge20",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/terraform-providers/terraform-provider-boundary)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi/pulumi-boundary` repo](https://github.com/pulumi/pulumi-boundary/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-providers/terraform-provider-boundary` repo](https://github.com/terraform-providers/terraform-provider-boundary/issues)."
+        }
+    }
+}
